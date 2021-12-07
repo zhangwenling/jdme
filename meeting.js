@@ -51,10 +51,12 @@ function sendCreateMeeting(body){
         body: body
     };
 
-    fetch(myRequest).then(response => {
+    $task.fetch(myRequest).then(response => {
         console.log(response.statusCode + "\n\n" + response.body);
+        $done();
     }, reason => {
         console.log(reason.error);
+        $done();
     });
 }
 
