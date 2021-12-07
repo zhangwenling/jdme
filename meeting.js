@@ -53,10 +53,8 @@ function sendCreateMeeting(body){
 
     $task.fetch(myRequest).then(response => {
         console.log(response.statusCode + "\n\n" + response.body);
-        $done();
     }, reason => {
         console.log(reason.error);
-        $done();
     });
 }
 
@@ -106,5 +104,5 @@ meetingInfoArr[1] = zhuque
 for (let body of meetingInfoArr) {
     sendCreateMeeting(body)
 }
-
+$done();
 
