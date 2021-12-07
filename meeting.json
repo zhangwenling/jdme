@@ -1,0 +1,7 @@
+{
+    "task":[
+        {
+            "config":"*/1 * * * * https://raw.githubusercontent.com/zhangwenling/jdme/main/meeting.js, tag=会议室, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/jd.png"
+        }
+    ]
+}
