@@ -105,3 +105,5 @@ for (let body of meetingInfoArr) {
     sendCreateMeeting(body)
 }
 
+setTimeout(() => $done(), 3000)
+
