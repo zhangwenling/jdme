@@ -43,7 +43,7 @@ function sendCreateMeeting(body){
     };
     // const body = `{"meetingName":"中华鲟","meetingCode":"2001001688","workplaceCode":"1001000053","districtCode":"13","meetingEstimateDate":"2021-12-08","meetingEstimateStime":1200,"meetingEstimateEtime":1300,"bookJoyMeeting":false,"joyMeetingParam":{"meeting":{"password":""}},"meetingSubject":"张文领预约了中华鲟会议室","lang":"zh"}`;
 
-    console.log(body)
+    console.log('开始预订会议室',body)
     const myRequest = {
         url: url,
         method: method,
