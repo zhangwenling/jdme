@@ -104,5 +104,4 @@ meetingInfoArr[1] = zhuque
 for (let body of meetingInfoArr) {
     sendCreateMeeting(body)
 }
-$done();
 
