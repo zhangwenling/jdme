@@ -64,7 +64,7 @@ async function sendCreateMeeting(body) {
     });*/
     let response = await $task.fetch(myRequest)
     let responseJson = await response.json()
-    log(response.statusCode + "\n\n" + responseJson);
+    log('response结果 '+ response.statusCode + "\n\n" + responseJson);
     return responseJson
 }
 
@@ -117,7 +117,7 @@ meetingInfoArr[0] = qinglong
 meetingInfoArr[1] = zhuque
 
 for (let body of meetingInfoArr) {
-    var responseJson = sendCreateMeeting(body);
+    var responseJson = await sendCreateMeeting(body);
     log(body.meetingName + ' 结果 ' + responseJson.resultCode + ' ' + responseJson.message)
 }
 
