@@ -3,7 +3,7 @@
  *
  */
 function log(msg) {
-    console.log(new Date().toString() +" : "+ msg)
+    console.log(new Date().toString() + " : " + msg)
 }
 
 log('zhangsan')
@@ -22,7 +22,7 @@ function getTomorrow() {
     return dateStr;
 }
 
-function sendCreateMeeting(body) {
+async function sendCreateMeeting(body) {
     const url = `https://jmrs.jd.com/meetingOrder/create`;
     const method = `POST`;
     const headers = {
@@ -57,15 +57,24 @@ function sendCreateMeeting(body) {
         body: body
     };
 
-    $task.fetch(myRequest).then(response => {
+    /*$task.fetch(myRequest).then(response => {
         log(response.statusCode + "\n\n" + response.body);
     }, reason => {
         log(reason.error);
-    });
+    });*/
+    let response = await $task.fetch(myRequest)
+    let responseJson = await response.json()
+    log(response.statusCode + "\n\n" + responseJson);
+    return responseJson
 }
 
-var tomorrowDate = getTomorrow();
+let tomorrowDate = getTomorrow();
 console.log(tomorrowDate)
+let dt = new Date(tomorrowDate);
+if (dt.getDay() % 6 == 0) {
+    log('tomorrowDate是双休日，无需执行')
+    return false
+}
 
 const qinglong = `{
     "meetingName": "青龙",
@@ -108,7 +117,8 @@ meetingInfoArr[0] = qinglong
 meetingInfoArr[1] = zhuque
 
 for (let body of meetingInfoArr) {
-    sendCreateMeeting(body)
+    var responseJson = sendCreateMeeting(body);
+    log(body.meetingName + ' 结果 ' + responseJson.resultCode + ' ' + responseJson.message)
 }
 
 setTimeout(() => $done(), 2000)
