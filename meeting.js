@@ -2,6 +2,8 @@
  * @fileoverview Template to compose HTTP reqeuest.
  *
  */
+const fetch = require('node-fetch')
+
 function log(msg) {
     let timestamp = new Date( +new Date() + 8 * 3600 * 1000 ).toJSON().substr(0,19).replace("T"," ")
     console.log(timestamp + " : " + msg)
@@ -56,7 +58,7 @@ function sendCreateMeeting(body) {
         body: body
     };
 
-    $task.fetch(myRequest).then(response => {
+    fetch(myRequest).then(response => {
         log(response.statusCode + "\n\n" + response.body);
     }, reason => {
         log(reason.error);
