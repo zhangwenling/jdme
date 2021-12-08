@@ -3,7 +3,8 @@
  *
  */
 function log(msg) {
-    console.log(new Date().toString() + " : " + msg)
+    let timestamp = new Date( +new Date() + 8 * 3600 * 1000 ).toJSON().substr(0,19).replace("T"," ")
+    console.log(timestamp + " : " + msg)
 }
 
 //获取明天时间 yyyy-mm-dd
@@ -114,5 +115,5 @@ for (let body of meetingInfoArr) {
     sendCreateMeeting(body);
 }
 
-setTimeout(() => $done(), 2000)
+setTimeout(() => $done(), 1000)
 
