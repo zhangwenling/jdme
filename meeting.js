@@ -19,7 +19,7 @@ function getTomorrow() {
     return dateStr;
 }
 
-async function sendCreateMeeting(body) {
+function sendCreateMeeting(body) {
     const url = `https://jmrs.jd.com/meetingOrder/create`;
     const method = `POST`;
     const headers = {
@@ -54,15 +54,12 @@ async function sendCreateMeeting(body) {
         body: body
     };
 
-    /*$task.fetch(myRequest).then(response => {
+    $task.fetch(myRequest).then(response => {
         log(response.statusCode + "\n\n" + response.body);
     }, reason => {
         log(reason.error);
-    });*/
-    let response = await $task.fetch(myRequest)
-    let responseJson = await response.json()
-    log('response结果 '+ response.statusCode + "\n\n" + responseJson);
-    return responseJson
+    });
+
 }
 
 let tomorrowDate = getTomorrow();
@@ -114,8 +111,7 @@ meetingInfoArr[0] = qinglong
 meetingInfoArr[1] = zhuque
 
 for (let body of meetingInfoArr) {
-    var responseJson = await sendCreateMeeting(body);
-    log(body.meetingName + ' 结果 ' + responseJson.resultCode + ' ' + responseJson.message)
+    sendCreateMeeting(body);
 }
 
 setTimeout(() => $done(), 2000)
