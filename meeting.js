@@ -5,9 +5,6 @@
 function log(msg) {
     console.log(new Date().toString() + " : " + msg)
 }
-
-log('zhangsan')
-
 //获取明天时间 yyyy-mm-dd
 function getTomorrow() {
     //昨天的时间
@@ -69,7 +66,7 @@ async function sendCreateMeeting(body) {
 }
 
 let tomorrowDate = getTomorrow();
-console.log(tomorrowDate)
+log('开始执行任务' = tomorrowDate)
 let dt = new Date(tomorrowDate);
 if (dt.getDay() % 6 == 0) {
     log('tomorrowDate是双休日，无需执行')
