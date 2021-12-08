@@ -5,6 +5,7 @@
 function log(msg) {
     console.log(new Date().toString() + " : " + msg)
 }
+
 //获取明天时间 yyyy-mm-dd
 function getTomorrow() {
     //昨天的时间
@@ -19,7 +20,7 @@ function getTomorrow() {
     return dateStr;
 }
 
-async function sendCreateMeeting(body) {
+function sendCreateMeeting(body) {
     const url = `https://jmrs.jd.com/meetingOrder/create`;
     const method = `POST`;
     const headers = {
@@ -54,14 +55,11 @@ async function sendCreateMeeting(body) {
         body: body
     };
 
-    /*$task.fetch(myRequest).then(response => {
+    $task.fetch(myRequest).then(response => {
         log(response.statusCode + "\n\n" + response.body);
     }, reason => {
         log(reason.error);
-    });*/
-    let response = await $task.fetch(myRequest)
-    let responseJson = await response.json()
-    log(' 结果 ' + responseJson.resultCode + ' ' + responseJson.message)
+    });
 }
 
 let tomorrowDate = getTomorrow();
@@ -116,6 +114,5 @@ for (let body of meetingInfoArr) {
     sendCreateMeeting(body);
 }
 
-$done()
-// setTimeout(() => , 2000)
+setTimeout(() => $done(), 2000)
 
