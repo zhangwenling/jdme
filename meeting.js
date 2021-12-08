@@ -60,7 +60,8 @@ async function sendCreateMeeting(body) {
         log(reason.error);
     });*/
     let response = await $task.fetch(myRequest)
-    return response.json()
+    let responseJson = await response.json()
+    log(' 结果 ' + responseJson.resultCode + ' ' + responseJson.message)
 }
 
 let tomorrowDate = getTomorrow();
@@ -112,9 +113,9 @@ meetingInfoArr[0] = qinglong
 meetingInfoArr[1] = zhuque
 
 for (let body of meetingInfoArr) {
-    var responseJson = sendCreateMeeting(body);
-    log(' 结果 ' + responseJson.resultCode + ' ' + responseJson.message)
+    sendCreateMeeting(body);
 }
 
-setTimeout(() => $done(), 2000)
+$done()
+// setTimeout(() => , 2000)
 
