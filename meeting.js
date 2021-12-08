@@ -112,7 +112,7 @@ meetingInfoArr[0] = qinglong
 meetingInfoArr[1] = zhuque
 
 for (let body of meetingInfoArr) {
-    var responseJson = await sendCreateMeeting(body);
+    var responseJson = sendCreateMeeting(body);
     log(' 结果 ' + responseJson.resultCode + ' ' + responseJson.message)
 }
 
