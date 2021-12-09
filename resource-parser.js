@@ -98,9 +98,9 @@ for (let string of strings) {
 
 list.sort(function (a, b) {
     var aSplit = a.split('|');
-    var aWeight = parseInt(aSplit.length == 2 ? aSplit[1] : 1000);
+    var aWeight = parseInt(aSplit.length == 2 ? aSplit[1] : 50);
     var bSplit = b.split('|');
-    var bWeight = parseInt(bSplit.length == 2 ? bSplit[1] : 1000);
+    var bWeight = parseInt(bSplit.length == 2 ? bSplit[1] : 50);
     return bWeight - aWeight;//	降序，升序则反之
 });
 total = list.join('\r\n');
