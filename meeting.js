@@ -1,11 +1,5 @@
-/**
- * @fileoverview Template to compose HTTP reqeuest.
- *
- */
-const fetch = require('node-fetch')
-
 function log(msg) {
-    let timestamp = new Date( +new Date() + 8 * 3600 * 1000 ).toJSON().substr(0,19).replace("T"," ")
+    let timestamp = new Date(+new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ")
     console.log(timestamp + " : " + msg)
 }
 
@@ -58,22 +52,16 @@ function sendCreateMeeting(body) {
         body: body
     };
 
-    fetch(myRequest).then(response => {
+    $task.fetch(myRequest).then(response => {
         log(response.statusCode + "\n\n" + response.body);
     }, reason => {
         log(reason.error);
     });
 }
 
-let tomorrowDate = getTomorrow();
-log('开始执行任务: ' + tomorrowDate)
-let dt = new Date(tomorrowDate);
-if (dt.getDay() % 6 == 0) {
-    log('tomorrowDate是双休日，无需执行')
-    return false
-}
 
-const qinglong = `{
+function go() {
+    const qinglong = `{
     "meetingName": "青龙",
     "meetingCode": "2001001714",
     "workplaceCode": "1001000053",
@@ -91,7 +79,7 @@ const qinglong = `{
     "lang": "zh"
 }`;
 
-const zhuque = `{
+    const zhuque1 = `{
     "meetingName": "朱雀",
     "meetingCode": "2001001717",
     "workplaceCode": "1001000053",
@@ -109,13 +97,50 @@ const zhuque = `{
     "lang": "zh"
 }`;
 
-var meetingInfoArr = new Array()
-meetingInfoArr[0] = qinglong
-meetingInfoArr[1] = zhuque
+    const zhuque2 = `{
+    "meetingName": "朱雀",
+    "meetingCode": "2001001717",
+    "workplaceCode": "1001000053",
+    "districtCode": "13",
+    "meetingEstimateDate": "${tomorrowDate}",
+    "meetingEstimateStime": 1500,
+    "meetingEstimateEtime": 1600,
+    "bookJoyMeeting": false,
+    "joyMeetingParam": {
+        "meeting": {
+            "password": ""
+        }
+    },
+    "meetingSubject": "张文领预约了朱雀会议室",
+    "lang": "zh"
+}`;
 
-for (let body of meetingInfoArr) {
-    sendCreateMeeting(body);
+    let meetingInfoArr = new Array()
+    meetingInfoArr[0] = qinglong
+    meetingInfoArr[1] = zhuque1
+    meetingInfoArr[2] = zhuque2
+    for (let body of meetingInfoArr) {
+        sendCreateMeeting(body);
+    }
 }
 
-setTimeout(() => $done(), 1000)
+
+let tomorrowDate = getTomorrow();
+log('开始执行任务: ' + tomorrowDate)
+let dt = new Date(tomorrowDate);
+if (dt.getDay() % 6 == 0) {
+    log('tomorrowDate是双休日，无需执行')
+    return false
+}
+
+const meetingTime = new Date(tomorrowDate + " 09:00:00").getTime()
+const currentTime = new Date().getTime()
+const betweenTime = Math.abs(meetingTime - currentTime);
+if (betweenTime > 5000) {
+    log(betweenTime + 'ms时间过长')
+    return
+}
+log(betweenTime + 'ms后开始抢')
+setTimeout(go, betweenTime)
+setTimeout(() => $done(), betweenTime + 1000)
 
