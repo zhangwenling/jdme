@@ -135,7 +135,7 @@ if (dt.getDay() % 6 == 0) {
 
 const meetingTime = new Date(tomorrowDate + " 09:00:00").getTime()
 const currentTime = new Date().getTime()
-const betweenTime = Math.abs(meetingTime - currentTime);
+let betweenTime =10
 if (betweenTime > 5000) {
     log(betweenTime + 'ms时间过长')
     return
