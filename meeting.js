@@ -18,10 +18,8 @@ function getTomorrow() {
 }
 
 function convertDateFromString(dateString) {
-    let arr1 = dateString.split(" ");
-    let sdate = arr1[0].split('-');
-    let date = new Date(sdate[0], sdate[1] - 1, sdate[2]);
-    return date;
+    dateString = dateString.replace(/-/g, '/')
+    return new Date(dateString)
 }
 
 function sendCreateMeeting(body) {
@@ -141,6 +139,7 @@ if (dt.getDay() % 6 == 0) {
 }
 
 const meetingTime = convertDateFromString(tomorrowDate + " 09:00:00").getTime()
+log(meetingTime)
 const currentTime = new Date().getTime()
 let betweenTime = Math.abs(meetingTime - currentTime)
 log('betweenTime ' + betweenTime)
