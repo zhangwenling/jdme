@@ -146,11 +146,14 @@ let betweenTime = Math.abs(meetingTime - currentTime)
 log('betweenTime ' + betweenTime)
 if (betweenTime > 5000) {
     log(betweenTime + 'ms时间过长')
+    $done()
     return
 }
 log(betweenTime + 'ms后开始抢')
 setTimeout(go, betweenTime)
-setTimeout(go, betweenTime)
+setTimeout(go, betweenTime + 200)
+setTimeout(go, betweenTime + 500)
+
 
 setTimeout(() => $done(), betweenTime + 1000)
 
