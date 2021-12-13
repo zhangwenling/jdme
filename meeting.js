@@ -17,6 +17,13 @@ function getTomorrow() {
     return dateStr;
 }
 
+function convertDateFromString(dateString) {
+    let arr1 = dateString.split(" ");
+    let sdate = arr1[0].split('-');
+    let date = new Date(sdate[0], sdate[1] - 1, sdate[2]);
+    return date;
+}
+
 function sendCreateMeeting(body) {
     const url = `https://jmrs.jd.com/meetingOrder/create`;
     const method = `POST`;
@@ -97,10 +104,10 @@ function go() {
     "lang": "zh"
 }`;
 
-    const zhuque2 = `{
-    "meetingName": "朱雀",
-    "meetingCode": "2001001717",
-    "workplaceCode": "1001000053",
+    const xiaojinku = `{
+    "meetingName": "小金库",
+    "meetingCode": "2001003746",
+    "workplaceCode": "1001000052",
     "districtCode": "13",
     "meetingEstimateDate": "${tomorrowDate}",
     "meetingEstimateStime": 1500,
@@ -111,14 +118,14 @@ function go() {
             "password": ""
         }
     },
-    "meetingSubject": "张文领预约了朱雀会议室",
+    "meetingSubject": "张文领预约了小金库会议室",
     "lang": "zh"
 }`;
 
     let meetingInfoArr = new Array()
     meetingInfoArr[0] = qinglong
     meetingInfoArr[1] = zhuque1
-    meetingInfoArr[2] = zhuque2
+    meetingInfoArr[2] = xiaojinku
     for (let body of meetingInfoArr) {
         sendCreateMeeting(body);
     }
@@ -133,14 +140,17 @@ if (dt.getDay() % 6 == 0) {
     return false
 }
 
-const meetingTime = new Date(tomorrowDate + " 09:00:00").getTime()
+const meetingTime = convertDateFromString(tomorrowDate + " 09:00:00").getTime()
 const currentTime = new Date().getTime()
-let betweenTime =10
+let betweenTime = Math.abs(meetingTime - currentTime)
+log('betweenTime ' + betweenTime)
 if (betweenTime > 5000) {
     log(betweenTime + 'ms时间过长')
     return
 }
 log(betweenTime + 'ms后开始抢')
 setTimeout(go, betweenTime)
+setTimeout(go, betweenTime)
+
 setTimeout(() => $done(), betweenTime + 1000)
 
