@@ -1,5 +1,5 @@
 function log(msg) {
-    let timestamp = new Date(+new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ")
+    let timestamp = new Date(new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ")
     console.log(timestamp + " : " + msg)
 }
 
@@ -138,7 +138,7 @@ if (dt.getDay() % 6 == 0) {
     return false
 }
 
-let todayDate = new Date(+new Date() + 8 * 3600 * 1000).toJSON().substr(0, 10)
+let todayDate = new Date(new Date() + 8 * 3600 * 1000).toJSON().substr(0, 10)
 log(todayDate)
 const meetingTime = convertDateFromString(todayDate + " 09:00:00").getTime()
 log(meetingTime)
