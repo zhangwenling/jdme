@@ -4,10 +4,10 @@ function log(msg) {
 }
 
 //获取明天时间 yyyy-mm-dd
-function getTomorrow() {
+function getDate(addDay) {
     //昨天的时间
     let nowDate = new Date();
-    nowDate.setDate(nowDate.getDate() + 1);
+    nowDate.setDate(nowDate.getDate() + addDay);
     let year = nowDate.getFullYear();
     let month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1)
         : nowDate.getMonth() + 1;
@@ -130,7 +130,7 @@ function go() {
 }
 
 
-let tomorrowDate = getTomorrow();
+let tomorrowDate = getDate(1);
 log('开始执行任务: ' + tomorrowDate)
 let dt = new Date(tomorrowDate);
 if (dt.getDay() % 6 == 0) {
@@ -138,7 +138,7 @@ if (dt.getDay() % 6 == 0) {
     return false
 }
 
-let todayDate = new Date(new Date() + 8 * 3600 * 1000).toJSON().substr(0, 10)
+let todayDate = getDate(0)
 log(todayDate)
 const meetingTime = convertDateFromString(todayDate + " 09:00:00").getTime()
 log(meetingTime)
