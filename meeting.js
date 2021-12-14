@@ -138,7 +138,9 @@ if (dt.getDay() % 6 == 0) {
     return false
 }
 
-const meetingTime = convertDateFromString(tomorrowDate + " 09:00:00").getTime()
+let todayDate = new Date(+new Date() + 8 * 3600 * 1000).toJSON().substr(0, 10)
+log(todayDate)
+const meetingTime = convertDateFromString(todayDate + " 09:00:00").getTime()
 log(meetingTime)
 const currentTime = new Date().getTime()
 let betweenTime = Math.abs(meetingTime - currentTime)
