@@ -1,5 +1,6 @@
 function log(msg) {
-    let timestamp = new Date(new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ")
+    // let timestamp = new Date(new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ")
+    let timestamp = new Date().toLocaleTimeString()
     console.log(timestamp + " : " + msg)
 }
 
