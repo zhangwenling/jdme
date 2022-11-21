@@ -1,0 +1,5 @@
+proxies:
+  - name: "腾讯云代理"
+    type: http
+    server: 101.42.224.183
+    port: 8899
